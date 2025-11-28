@@ -1,1 +1,1384 @@
-<h1>Github page</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carlos A Cassaffousth</title>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        :root {
+            --color-principal: #004aad;
+            --color-secundario: #0077ff;
+            --color-fondo: #f5f7fa;
+            --color-texto: #222;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: var(--color-fondo);
+        }
+
+        header {
+            background: var(--color-principal);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .login-header-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .login-header-btn:hover {
+            background: white;
+            color: var(--color-principal);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .account-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 10px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .account-btn:hover {
+            background: white;
+            color: var(--color-principal);
+        }
+
+        .account-panel {
+            position: fixed;
+            top: 62px;
+            right: 30px;
+            width: 260px;
+            background: white;
+            color: var(--color-texto);
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            padding: 14px;
+            display: none;
+            z-index: 110;
+        }
+
+        .account-panel.active {
+            display: block;
+        }
+
+        .account-panel h4 {
+            margin: 0 0 6px 0;
+            color: var(--color-principal);
+        }
+
+        .account-row {
+            font-size: 14px;
+            margin: 6px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .account-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            justify-content: flex-end;
+        }
+
+        .account-actions .btn {
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary { background: var(--color-principal); color: white; }
+        .btn-secondary { background: #f0f0f0; color: var(--color-texto); }
+
+        .hero {
+            background: url("C:\\Users\\nicol\\Desktop\\holaleo\\papu.jpg") center/cover;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            color: white;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.55);
+            z-index: 1;
+        }
+
+        .hero h2 {
+            position: relative;
+            font-size: 48px;
+            text-align: center;
+            z-index: 2;
+            font-weight: 700;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+            max-width: 90%;
+            line-height: 1.4;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-buttons {
+            background: var(--color-principal);
+            padding: 15px 30px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-btn {
+            background: white;
+            color: var(--color-principal);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .nav-btn:hover,
+        .nav-btn.active {
+            background: var(--color-secundario);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .content-area {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+            min-height: 60vh;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            color: var(--color-principal);
+            margin-top: 0;
+        }
+
+        .card p {
+            line-height: 1.8;
+            color: var(--color-texto);
+        }
+
+        .news-filters {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .news-filters button {
+            background: var(--color-fondo);
+            color: var(--color-principal);
+            border: 2px solid var(--color-secundario);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .news-filters button:hover,
+        .news-filters button.active {
+            background: var(--color-secundario);
+            color: white;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .news-card {
+            background: white;
+            border-left: 4px solid var(--color-secundario);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .news-badge {
+            display: inline-block;
+            background: var(--color-secundario);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .news-card h3 {
+            color: var(--color-principal);
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        .news-card p {
+            color: var(--color-texto);
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+
+        .news-date {
+            color: #888;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        .history-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .history-buttons button {
+            background: var(--color-secundario);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .history-buttons button:hover {
+            background: var(--color-principal);
+            transform: scale(1.05);
+        }
+
+        #history-text {
+            padding: 15px;
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--color-texto);
+            background: var(--color-fondo);
+            border-radius: 8px;
+        }
+
+        .map-iframe {
+            width: 100%;
+            height: 450px;
+            border-radius: 12px;
+            border: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .contact-info p {
+            font-size: 16px;
+            margin: 12px 0;
+            line-height: 1.6;
+        }
+
+        .specialties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .specialty-card {
+            background: white;
+            padding: 16px;
+            border-radius: 10px;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+            text-align: center;
+        }
+
+        .specialty-card h4 { margin: 8px 0 6px 0; color: var(--color-principal); }
+        .specialty-card p { font-size: 14px; color: var(--color-texto); }
+
+        .more-info-btn {
+            margin-top: 10px;
+            background: var(--color-secundario);
+            color: white;
+            border: none;
+            padding: 8px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .specialty-detail { display: none; margin-top: 12px; text-align: left; font-size: 14px; color: var(--color-texto); }
+        .specialty-detail.open { display: block; }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .gallery-item {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+        }
+
+        .gallery-item img { width: 100%; height: 120px; object-fit: cover; display: block; }
+
+        .image-modal { display: none; position: fixed; z-index: 1200; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); align-items: center; justify-content: center; }
+        .image-modal.active { display: flex; }
+        .image-modal img { max-width: 90%; max-height: 80%; border-radius: 8px; }
+        .image-modal .img-controls { position: absolute; top: 50%; transform: translateY(-50%); width: 100%; display:flex; justify-content:space-between; padding: 0 20px; }
+        .img-btn { background: rgba(255,255,255,0.2); color: white; border: none; padding: 10px 14px; border-radius: 6px; cursor: pointer; }
+
+       
+        .panel-tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; }
+        .panel-tabs button { padding:8px 12px; background:var(--color-fondo); border:1px solid #ddd; border-radius:6px; cursor:pointer; }
+        .panel-tabs button.active { background:var(--color-secundario); color:white; border-color:var(--color-secundario); }
+        .panel-content { background:white; padding:12px; border-radius:8px; box-shadow: 0 4px 10px rgba(0,0,0,0.04); }
+
+        .faq-item { border-bottom:1px dashed #eee; padding:10px 0; }
+        .faq-question { cursor:pointer; font-weight:700; }
+        .faq-answer { display:none; margin-top:8px; color:var(--color-texto); }
+        .faq-answer.active { display:block; }
+
+        .contact-info i {
+            color: var(--color-secundario);
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        footer {
+            background: var(--color-principal);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+   
+        .login-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeInModal 0.3s ease-in;
+        }
+
+        .login-modal.active {
+            display: flex;
+        }
+
+        @keyframes fadeInModal {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .login-content {
+            background: white;
+            margin: auto;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            width: 90%;
+            max-width: 400px;
+            animation: slideInModal 0.3s ease-in;
+        }
+
+        @keyframes slideInModal {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h2 {
+            color: var(--color-principal);
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .login-header p {
+            color: #888;
+            margin: 5px 0 0 0;
+            font-size: 14px;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            color: var(--color-principal);
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        /* Alumnos resources */
+        .resource-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+
+        .resource-card {
+            background: white;
+            padding: 18px;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+        }
+
+        .resource-card h3 { margin-top: 0; color: var(--color-principal); }
+
+        .resource-list { list-style: none; padding: 0; margin: 8px 0 0 0; }
+        .resource-list li { padding: 8px 0; border-bottom: 1px dashed #eee; display: flex; justify-content: space-between; align-items: center; }
+
+        .download-link { text-decoration: none; color: var(--color-secundario); font-weight: 700; }
+        .download-link i { margin-right: 8px; }
+
+        @media (max-width: 700px) {
+            .account-panel { right: 14px; left: 14px; top: 68px; width: auto; }
+        }
+
+        .form-group input {
+            padding: 12px;
+            border: 2px solid var(--color-fondo);
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: 'Montserrat', sans-serif;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--color-secundario);
+            box-shadow: 0 0 0 3px rgba(0,119,255,0.1);
+        }
+
+        .login-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .login-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .btn-submit {
+            background: var(--color-secundario);
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background: var(--color-principal);
+        }
+
+        .btn-cancel {
+            background: var(--color-fondo);
+            color: var(--color-principal);
+            border: 2px solid var(--color-principal);
+        }
+
+        .btn-cancel:hover {
+            background: var(--color-principal);
+            color: white;
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 13px;
+            color: #888;
+        }
+
+        .login-footer a {
+            color: var(--color-secundario);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .map-iframe {
+                height: 300px;
+            }
+
+            .nav-buttons {
+                padding: 10px 15px;
+                gap: 10px;
+            }
+
+            .nav-btn {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+
+            header h1 {
+                font-size: 18px;
+            }
+
+            .hero h2 {
+                font-size: 28px;
+            }
+
+            .login-content {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Carlos A Cassaffousth</h1>
+    <div class="header-actions">
+        <button class="account-btn" onclick="toggleAccount(event)" title="Mi cuenta">
+            <i class="fas fa-user"></i> Mi cuenta
+        </button>
+        <button class="login-header-btn" onclick="openLogin()" title="Iniciar sesión">
+            <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+        </button>
+    </div>
+</header>
+
+<section class="hero">
+    <h2>Instituto Provincial de Enseñanza Técnica N°247<br> "Ing. Carlos A. Cassaffousth"</h2>
+</section>
+
+
+    <section class="nav-buttons">
+        <button class="nav-btn active" onclick="showSection('inicio', this)"><i class="fas fa-home"></i> Inicio</button>
+        <button class="nav-btn" onclick="showSection('noticias', this)"><i class="fas fa-newspaper"></i> Noticias</button>
+        <button class="nav-btn" onclick="showSection('oferta', this)"><i class="fas fa-chalkboard-teacher"></i> Oferta</button>
+        <button class="nav-btn" onclick="showSection('historia', this)"><i class="fas fa-book"></i> Historia</button>
+        <button class="nav-btn" onclick="showSection('ubicacion', this)"><i class="fas fa-map-marker-alt"></i> Ubicación</button>
+        <button class="nav-btn" onclick="showSection('alumnos', this)"><i class="fas fa-graduation-cap"></i> Alumnos</button>
+        <button class="nav-btn" onclick="showSection('contacto', this)"><i class="fas fa-envelope"></i> Contacto</button>
+
+<div class="content-area">
+
+    
+    <section class="content-section active" id="inicio">
+        <div class="card">
+            <h2><i class="fas fa-info-circle"></i> Bienvenido al IPET N°247</h2>
+            <p>El Instituto Provincial de Enseñanza Técnica N.º 247 “Ing. Carlos A. Cassaffousth” es una institución educativa con una sólida trayectoria en la formación de técnicos altamente capacitados en diversas especialidades vinculadas a la tecnología y la industria. Su propuesta educativa se basa en una combinación equilibrada entre conocimientos teóricos, prácticas de taller y experiencias reales de aplicación, lo que permite desarrollar en los estudiantes competencias técnicas, científicas y profesionales acordes a las demandas actuales del mundo laboral.</p>
+            <p>Con una rica historia que se remonta a 1919, nuestro instituto continúa evolucionando para ofrecer educación de calidad orientada hacia la tecnología y la innovación.</p>
+            <p>Explora las diferentes secciones para conocer más sobre nuestra institución, noticias, historia, ubicación y formas de contacto.</p>
+        </div>
+    </section>
+
+    <section class="content-section" id="noticias">
+        <div class="card">
+            <h2><i class="fas fa-newspaper"></i> Noticias y Novedades</h2>
+            
+            <div class="news-filters">
+                <button class="active" onclick="filterNews('todos')"><i class="fas fa-list"></i> Todos</button>
+                <button onclick="filterNews('comunicado')"><i class="fas fa-bullhorn"></i> Comunicados</button>
+                <button onclick="filterNews('examenes')"><i class="fas fa-pen"></i> Exámenes</button>
+                <button onclick="filterNews('evento')"><i class="fas fa-calendar-alt"></i> Eventos</button>
+                <button onclick="filterNews('actividad')"><i class="fas fa-star"></i> Actividades</button>
+                <button onclick="filterNews('congreso')"><i class="fas fa-trophy"></i> Congresos/Charlas</button>
+            </div>
+
+            <div class="news-grid" id="news-grid"></div>
+        </div>
+    </section>
+
+   
+    <section class="content-section" id="oferta">
+        <div class="card">
+            <h2><i class="fas fa-chalkboard-teacher"></i> Oferta Educativa</h2>
+            <p>Especialidades disponibles en el instituto:</p>
+            <div class="specialties-grid">
+                <div class="specialty-card">
+                    <i class="fas fa-car fa-2x"></i>
+                    <h4>Automotores</h4>
+                    <p>Formación en mecánica y reparación automotriz.</p>
+                    <button class="more-info-btn" onclick="toggleSpecialty(this)">Más info</button>
+                    <div class="specialty-detail">
+                        <p>Plan de estudios: motores, sistemas de combustible, electricidad automotriz, diagnóstico y prácticas de taller.</p>
+                        <p>Contacto: Cassaffousth@gmail.com</p>
+                    </div>
+                </div>
+
+                <div class="specialty-card">
+                    <i class="fas fa-hard-hat fa-2x"></i>
+                    <h4>Construcciones</h4>
+                    <p>Técnicas de construcción y diseño edilicio.</p>
+                    <button class="more-info-btn" onclick="toggleSpecialty(this)">Más info</button>
+                    <div class="specialty-detail">
+                        <p>Plan de estudios: materiales, resistencia de materiales, lectura de planos, prácticas en obra y seguridad.</p>
+                        <p>Contacto: Cassaffousth@gmail.com</p>
+                    </div>
+                </div>
+
+                <div class="specialty-card">
+                    <i class="fas fa-bolt fa-2x"></i>
+                    <h4>Electricidad</h4>
+                    <p>Instalaciones eléctricas y normativas.</p>
+                    <button class="more-info-btn" onclick="toggleSpecialty(this)">Más info</button>
+                    <div class="specialty-detail">
+                        <p>Plan de estudios: circuitos, instalaciones domiciliarias e industriales, normativa y seguridad eléctrica.</p>
+                        <p>Contacto: Cassaffousth@gmail.com</p>
+                    </div>
+                </div>
+
+                <div class="specialty-card">
+                    <i class="fas fa-microchip fa-2x"></i>
+                    <h4>Electrónica</h4>
+                    <p>Electrónica analógica y digital, microcontroladores.</p>
+                    <button class="more-info-btn" onclick="toggleSpecialty(this)">Más info</button>
+                    <div class="specialty-detail">
+                        <p>Plan de estudios: electrónica básica, electrónica digital, microcontroladores, instrumentación y prácticas de laboratorio.</p>
+                        <p>Contacto: Cassaffousth@gmail.com</p>
+                    </div>
+                </div>
+
+                <div class="specialty-card">
+                    <i class="fas fa-couch fa-2x"></i>
+                    <h4>Industria del Mueble</h4>
+                    <p>Diseño y fabricación en madera y muebles.</p>
+                    <button class="more-info-btn" onclick="toggleSpecialty(this)">Más info</button>
+                    <div class="specialty-detail">
+                        <p>Plan de estudios: técnicas de carpintería, diseño asistido por computadora, lijado, acabado y ergonomía del mobiliario.</p>
+                        <p>Contacto: Cassaffousth@gmail.com</p>
+                    </div>
+                </div>
+
+                <div class="specialty-card">
+                    <i class="fas fa-tools fa-2x"></i>
+                    <h4>Mecánica</h4>
+                    <p>Mecánica general y mantenimiento industrial.</p>
+                    <button class="more-info-btn" onclick="toggleSpecialty(this)">Más info</button>
+                    <div class="specialty-detail">
+                        <p>Plan de estudios: máquinas, mantenimiento preventivo, hidráulica y neumática, y prácticas en talleres industriales.</p>
+                        <p>Contacto: Cassaffousth@gmail.com</p>
+                    </div>
+                </div>
+
+                
+                <div class="specialty-card">
+                    <i class="fas fa-code fa-2x"></i>
+                    <h4>Programación</h4>
+                    <p>Desarrollo de software, programación y sistemas.</p>
+                    <button class="more-info-btn" onclick="toggleSpecialty(this)">Más info</button>
+                    <div class="specialty-detail">
+                        <p>Plan de estudios: lógica de programación, algoritmos, estructuras de datos, bases de datos y desarrollo web/mobile con prácticas de laboratorio.</p>
+                        <p>Contacto: Cassaffousth@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3><i class="fas fa-images"></i> Galería de Fotos</h3>
+            <p>Fotos del colegio, talleres, aulas, eventos y competencias.</p>
+            <div class="gallery-grid" id="galleryGrid">
+                <div class="gallery-item" data-src="" onclick="openImage(event)"><img src="https://via.placeholder.com/400x300?text=Foto+1" alt="Foto 1"></div>
+                <div class="gallery-item" data-src="" onclick="openImage(event)"><img src="https://via.placeholder.com/400x300?text=Foto+2" alt="Foto 2"></div>
+                <div class="gallery-item" data-src="" onclick="openImage(event)"><img src="https://via.placeholder.com/400x300?text=Foto+3" alt="Foto 3"></div>
+                <div class="gallery-item" data-src="" onclick="openImage(event)"><img src="https://via.placeholder.com/400x300?text=Foto+4" alt="Foto 4"></div>
+                <div class="gallery-item" data-src="" onclick="openImage(event)"><img src="https://via.placeholder.com/400x300?text=Foto+5" alt="Foto 5"></div>
+                <div class="gallery-item" data-src="" onclick="openImage(event)"><img src="https://via.placeholder.com/400x300?text=Foto+6" alt="Foto 6"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3><i class="fas fa-question-circle"></i> Preguntas Frecuentes (FAQ)</h3>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">¿Cómo inscribo a mi hijo?</div>
+                <div class="faq-answer">La inscripción se realiza en Secretaría. Traer DNI del alumno y padres, y completar la planilla de inscripción.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">¿Cuáles son los requisitos para ingresar?</div>
+                <div class="faq-answer">Requieren certificado de estudios previos o constancia de título en trámite según el nivel.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">¿Qué documentación necesito presentar?</div>
+                <div class="faq-answer">DNI, certificado de estudios, fotos tamaño carnet y comprobante de domicilio.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">¿El uniforme es obligatorio?</div>
+                <div class="faq-answer">Depende de la actividad; para talleres es obligatorio el uso de indumentaria de seguridad indicada.</div>
+            </div>
+        </div>
+
+        <div id="imageModal" class="image-modal" onclick="closeImageModal(event)">
+            <div class="img-controls">
+                <button class="img-btn" onclick="prevImage(event)"><i class="fas fa-chevron-left"></i></button>
+                <button class="img-btn" onclick="nextImage(event)"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <img id="imageModalImg" src="" alt="">
+        </div>
+    </section>
+    <section class="content-section" id="historia">
+        <div class="card">
+            <h2><i class="fas fa-book"></i> Historia del Colegio</h2>
+
+            <div class="history-buttons">
+                <button onclick="showHistory('origen')">Origen (1919)</button>
+                <button onclick="showHistory('fundador')">El Fundador</button>
+                <button onclick="showHistory('evolucion')">Evolución</button>
+                <button onclick="showHistory('actualidad')">Actualidad</button>
+            </div>
+
+            <div id="history-text">
+                <i>Haz clic en un botón para ver la información.</i>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section" id="ubicacion">
+        <div class="card">
+            <h2><i class="fas fa-map-marker-alt"></i> Ubicación del Colegio</h2>
+            <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3408.8524453276063!2d-64.39523!3d-31.903333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95d688e5e5e5e5e5%3A0x0!2sDeán%20Funes%201499%2C%20X1549%20Córdoba!5e0!3m2!1ses!2sar!4v1234567890" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </section>
+
+    <section class="content-section" id="contacto">
+        <div class="card">
+            <h2><i class="fas fa-envelope"></i> Contacto</h2>
+            <div class="contact-info">
+                <p><i class="fas fa-envelope"></i> <strong>Email:</strong> Cassaffousth@gmail.com</p>
+                <p><i class="fas fa-phone"></i> <strong>Teléfono:</strong> +54-351-489 4466</p>
+                <p><i class="fas fa-location-dot"></i> <strong>Dirección:</strong> Deán Funes 1499, X1549 Córdoba</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section" id="alumnos">
+        <div class="card">
+            <h2><i class="fas fa-graduation-cap"></i> Zona de Alumnos</h2>
+            <p>Recursos e información útil para estudiantes: accesos, trámites, materiales, fechas y descargas.</p>
+        </div>
+
+       
+
+        <div class="resource-section">
+            <div class="resource-card">
+                <h3><i class="fas fa-sign-in-alt"></i> Acceso a plataforma</h3>
+                <p>Si tenés cuenta, podés ingresar a la plataforma institucional desde el siguiente enlace:</p>
+                <p><a class="download-link" href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Acceder a la plataforma</a></p>
+            </div>
+
+            <div class="resource-card">
+                <h3><i class="fas fa-file-signature"></i> Guía de trámites</h3>
+                <ul class="resource-list">
+                    <li>Certificados y constancias <a class="download-link" href="#" target="_blank"><i class="fas fa-download"></i> Descargar</a></li>
+                    <li>Pases y equivalencias <a class="download-link" href="#" target="_blank"><i class="fas fa-download"></i> Descargar</a></li>
+                    <li>Solicitud de certificados <a class="download-link" href="#" target="_blank"><i class="fas fa-download"></i> Descargar</a></li>
+                </ul>
+            </div>
+
+            <div class="resource-card">
+                <h3><i class="fas fa-book"></i> Material de estudio</h3>
+                <ul class="resource-list">
+                    <li>Apuntes de Electrónica <a class="download-link" href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Ver/Descargar</a></li>
+                    <li>Guía de Programación Web <a class="download-link" href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Ver/Descargar</a></li>
+                    <li>Biblioteca Digital <a class="download-link" href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Ir</a></li>
+                </ul>
+            </div>
+
+            <div class="resource-card">
+                <h3><i class="fas fa-calendar-alt"></i> Fechas importantes</h3>
+                <ul class="resource-list">
+                    <li>Inicio de clases: <strong>1 de Marzo, 2026</strong></li>
+                    <li>Exámenes finales: <strong>1 - 15 de Diciembre</strong></li>
+                    <li>Acto de colación: <strong>20 de Diciembre</strong></li>
+                </ul>
+            </div>
+
+            <div class="resource-card">
+                <h3><i class="fas fa-file-download"></i> Descargas</h3>
+                <ul class="resource-list">
+                    <li>Proyecto Educativo Institucional (PEI) <a class="download-link" href="#" download><i class="fas fa-download"></i> PEI.pdf</a></li>
+                    <li>Reglamento Interno <a class="download-link" href="#" download><i class="fas fa-download"></i> Reglamento.pdf</a></li>
+                    <li>Horarios (PDF) <a class="download-link" href="#" download><i class="fas fa-download"></i> Horarios.pdf</a></li>
+                </ul>
+            </div>
+
+            <div class="resource-card">
+                <h3><i class="fas fa-link"></i> Links útiles</h3>
+                <ul class="resource-list">
+                    <li>Listas de útiles ciclo básico <a class="download-link" href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Ver</a></li>
+                    <li>Trámites administrativos (constancias) <a class="download-link" href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Ver</a></li>
+                    <li>Contacto de Secretaría <a class="download-link" href="#" target="_blank"><i class="fas fa-phone"></i> +54-351-489 4466</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    © 2025 IPET 247 – Todos los derechos reservados.
+</footer>
+
+
+<div class="account-panel" id="accountPanel" aria-hidden="true">
+    <h4><i class="fas fa-user-circle"></i> Información básica</h4>
+    <div class="account-row"><strong>Nombre</strong><span>Carlos A. Cassaffousth</span></div>
+    <div class="account-row"><strong>Curso</strong><span>6to Año - Técnico en Electrónica</span></div>
+    <div class="account-row"><strong>Año/Turno</strong><span>2025 / Tarde</span></div>
+    <div class="account-actions">
+        <button class="btn btn-secondary" onclick="viewProfile()">Ver perfil</button>
+        <button class="btn btn-primary" onclick="logout()">Cerrar sesión</button>
+    </div>
+    
+   
+    <hr style="margin:12px 0; border-color:#eee">
+    <h4 style="margin-top:6px;"><i class="fas fa-user-graduate"></i> Panel de Alumnos</h4>
+    <div class="panel-tabs" role="tablist">
+        <button class="active" data-tab="notas" onclick="showAccountPanelTab(event,'notas')">Notas y Calificaciones</button>
+        <button data-tab="asistencias" onclick="showAccountPanelTab(event,'asistencias')">Asistencias</button>
+        <button data-tab="material" onclick="showAccountPanelTab(event,'material')">Material</button>
+        <button data-tab="horarios" onclick="showAccountPanelTab(event,'horarios')">Horarios</button>
+        <button data-tab="estado" onclick="showAccountPanelTab(event,'estado')">Estado académico</button>
+    </div>
+    <div class="panel-content" id="accountPanelContent">
+        <div class="panel-pane" id="account-pane-notas">
+            <h4 style="margin:6px 0">Notas recientes</h4>
+            <table style="width:100%; border-collapse: collapse; font-size:13px;">
+                <tr><th style="text-align:left; padding:6px">Asignatura</th><th style="text-align:left; padding:6px">Nota</th></tr>
+                <tr><td style="padding:6px">Matemáticas</td><td style="padding:6px">8.5</td></tr>
+                <tr><td style="padding:6px">Electrónica</td><td style="padding:6px">9.0</td></tr>
+            </table>
+        </div>
+        <div class="panel-pane" id="account-pane-asistencias" style="display:none;">
+            <h4 style="margin:6px 0">Asistencias</h4>
+            <p>Asistencia general: <strong>92%</strong></p>
+        </div>
+        <div class="panel-pane" id="account-pane-material" style="display:none;">
+            <h4 style="margin:6px 0">Material disponible</h4>
+            <ul class="resource-list" style="margin:8px 0">
+                <li>Apuntes Electrónica <a class="download-link" href="#"><i class="fas fa-download"></i> Descargar</a></li>
+            </ul>
+        </div>
+        <div class="panel-pane" id="account-pane-horarios" style="display:none;">
+            <h4 style="margin:6px 0">Horarios</h4>
+            <p><a class="download-link" href="#"><i class="fas fa-download"></i> Horario curso 6to Año (PDF)</a></p>
+        </div>
+        <div class="panel-pane" id="account-pane-estado" style="display:none;">
+            <h4 style="margin:6px 0">Estado académico</h4>
+            <p>Condición: <strong>Regular</strong></p>
+        </div>
+    </div>
+</div>
+
+<div class="login-modal" id="loginModal">
+    <div class="login-content">
+        <div class="login-header">
+            <h2><i class="fas fa-lock"></i> Iniciar Sesión</h2>
+            <p>Accede a tu cuenta de estudiante</p>
+        </div>
+
+        <form class="login-form" onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label for="email"><i class="fas fa-envelope"></i> Usuario/Email</label>
+                <input type="text" id="email" placeholder="tu@correo.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password"><i class="fas fa-key"></i> Contraseña</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+
+            <div class="login-buttons">
+                <button type="submit" class="login-btn btn-submit">
+                    <i class="fas fa-sign-in-alt"></i> Entrar
+                </button>
+                <button type="button" class="login-btn btn-cancel" onclick="closeLogin()">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+            </div>
+        </form>
+
+        <div class="login-footer">
+            <p>¿Olvidaste tu contraseña? <a href="#" onclick="alert('Contacta a administración')">Recuperar</a></p>
+        </div>
+    </div>
+</div>
+
+<script>
+
+const noticias = [
+    {
+        id: 1,
+        categoria: 'comunicado',
+        titulo: 'Comunicado Oficial - Reinicio de Clases',
+        descripcion: 'Las clases presenciales reanudan el próximo lunes. Se solicita puntualidad y uso obligatorio del uniforme.',
+        fecha: '25 de Noviembre, 2025'
+    },
+    {
+        id: 2,
+        categoria: 'examenes',
+        titulo: 'Fechas de Exámenes Finales',
+        descripcion: 'Los exámenes finales se realizarán entre el 1 y 15 de Diciembre. Consulta tu horario en la plataforma.',
+        fecha: '24 de Noviembre, 2025'
+    },
+    {
+        id: 3,
+        categoria: 'evento',
+        titulo: 'Acto de Colacion',
+        descripcion: 'El viernes 20 de Diciembre se realizará el acto de colacion de los estudiantes de 7to año.',
+        fecha: '19 de Noviembre, 2025'
+    },
+    {
+        id: 4,
+        categoria: 'actividad',
+        titulo: 'Jornada de Convivencia Escolar',
+        descripcion: 'Se invita a toda la comunidad educativa a participar en las actividades deportivas y recreativas.',
+        fecha: '22 de Noviembre, 2025'
+    },
+    {
+        id: 5,
+        categoria: 'congreso',
+        titulo: 'Congreso Nacional de Tecnología e Innovación',
+        descripcion: 'Participaremos como expositores en el congreso nacional. ¡Felicidades a nuestros estudiantes!',
+        fecha: '21 de Noviembre, 2025'
+    },
+    {
+        id: 6,
+        categoria: 'comunicado',
+        titulo: 'Recordatorio - Pago de Cuotas',
+        descripcion: 'Se solicita regularizar el pago de cuotas educativas antes del 30 de Noviembre.',
+        fecha: '20 de Noviembre, 2025'
+    },
+    {
+        id: 7,
+        categoria: 'actividad',
+        titulo: 'Charla sobre Programación Web',
+        descripcion: 'Especialista en desarrollo web dictará una charla gratuita el próximo viernes a las 15hs.',
+        fecha: '19 de Noviembre, 2025'
+    },
+    {
+        id: 8,
+        categoria: 'congreso',
+        titulo: 'Concurso de Electrónica 2025',
+        descripcion: 'Invitamos a los estudiantes a participar del concurso provincial de electrónica. Inscripciones abiertas.',
+        fecha: '18 de Noviembre, 2025'
+    }
+];
+
+function renderNews(category = 'todos') {
+    const newsGrid = document.getElementById('news-grid');
+    newsGrid.innerHTML = '';
+
+    const newsFiltradas = category === 'todos' ? noticias : noticias.filter(n => n.categoria === category);
+
+    const categoriaIcons = {
+        comunicado: 'fas fa-bullhorn',
+        examenes: 'fas fa-pen',
+        evento: 'fas fa-calendar-alt',
+        actividad: 'fas fa-star',
+        congreso: 'fas fa-trophy'
+    };
+
+    const categoriaNombres = {
+        comunicado: 'Comunicado',
+        examenes: 'Exámenes',
+        evento: 'Evento',
+        actividad: 'Actividad',
+        congreso: 'Congreso/Charla'
+    };
+
+    newsFiltradas.forEach(noticia => {
+        const card = document.createElement('div');
+        card.className = 'news-card';
+        card.innerHTML = `
+            <span class="news-badge"><i class="${categoriaIcons[noticia.categoria]}"></i> ${categoriaNombres[noticia.categoria]}</span>
+            <h3>${noticia.titulo}</h3>
+            <p>${noticia.descripcion}</p>
+            <p class="news-date"><i class="fas fa-calendar"></i> ${noticia.fecha}</p>
+        `;
+        newsGrid.appendChild(card);
+    });
+}
+
+function filterNews(category) {
+    const buttons = document.querySelectorAll('.news-filters button');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    renderNews(category);
+}
+
+function showSection(sectionId, button) {
+  
+    const sections = document.querySelectorAll('.content-section');
+    sections.forEach(section => section.classList.remove('active'));
+
+    
+    document.getElementById(sectionId).classList.add('active');
+
+    
+    const buttons = document.querySelectorAll('.nav-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+
+   
+    if (sectionId === 'noticias') {
+        renderNews();
+    }
+}
+
+function showHistory(section) {
+    let text = "";
+
+    if (section === "origen") {
+        text = "El IPET N°247 fue fundado en 1919 como parte del proyecto nacional de expansión de la educación técnica en Argentina. Su objetivo era formar jóvenes con habilidades técnicas para acompañar el crecimiento industrial del país.";
+    }
+    else if (section === "fundador") {
+        text = "El instituto lleva el nombre del Ingeniero Carlos A. Cassaffousth, un pionero de la ingeniería argentina, conocido por su labor en obras hidráulicas y su compromiso con el desarrollo regional.";
+    }
+    else if (section === "evolucion") {
+        text = "A lo largo de las décadas, el colegio incorporó nuevas especialidades, talleres, laboratorios y programas educativos que se adaptaron a los cambios tecnológicos y a las necesidades del mercado laboral.";
+    }
+    else if (section === "actualidad") {
+        text = "Hoy el IPET N°247 continúa formando técnicos competentes, con una fuerte orientación hacia la programación, electrónica, automatización y tecnología aplicada.";
+    }
+
+    document.getElementById("history-text").innerHTML = text;
+}
+
+
+function openLogin() {
+    document.getElementById("loginModal").classList.add("active");
+}
+
+function closeLogin() {
+    document.getElementById("loginModal").classList.remove("active");
+}
+
+function handleLogin(event) {
+    event.preventDefault();
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    
+    if (email && password) {
+        alert(`¡Bienvenido ${email}!\n\nNota: Este es un formulario de demostración.`);
+        document.getElementById("email").value = "";
+        document.getElementById("password").value = "";
+        closeLogin();
+    }
+}
+
+
+function toggleAccount(event) {
+    event.stopPropagation();
+    const panel = document.getElementById('accountPanel');
+    if (!panel) return;
+    const opening = !panel.classList.contains('active');
+    panel.classList.toggle('active');
+   
+    if (opening) {
+        
+        const firstBtn = panel.querySelector('.panel-tabs button');
+        if (firstBtn) {
+            showAccountPanelTab({ currentTarget: firstBtn }, firstBtn.getAttribute('data-tab'));
+        }
+    }
+}
+
+function closeAccount() {
+    const panel = document.getElementById('accountPanel');
+    if (panel && panel.classList.contains('active')) panel.classList.remove('active');
+}
+
+function viewProfile() {
+    alert('Abrir perfil (simulado)');
+    closeAccount();
+}
+
+function logout() {
+    alert('Cerrar sesión (simulado)');
+    closeAccount();
+}
+
+
+window.onclick = function(event) {
+    const modal = document.getElementById("loginModal");
+    const panel = document.getElementById('accountPanel');
+
+
+    if (modal && event.target == modal) {
+        closeLogin();
+    }
+
+
+    if (panel && panel.classList.contains('active')) {
+        const accountBtn = document.querySelector('.account-btn');
+        if (!panel.contains(event.target) && !(accountBtn && accountBtn.contains(event.target))) {
+            panel.classList.remove('active');
+        }
+    }
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.download-link').forEach(a => {
+        if (a.getAttribute('href') === '#') {
+            a.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('Recurso no disponible localmente. Sube el archivo a la carpeta del sitio y actualiza el enlace.');
+            });
+        }
+    });
+});
+
+
+let galleryImages = [];
+let currentImageIndex = 0;
+
+function buildGalleryIndex() {
+    galleryImages = Array.from(document.querySelectorAll('.gallery-item img')).map(img => img.src);
+}
+
+function openImage(e) {
+    let item = null;
+    if (e && e.currentTarget && e.currentTarget.classList && e.currentTarget.classList.contains('gallery-item')) {
+        item = e.currentTarget;
+    } else if (e && e.target) {
+        item = e.target.closest ? e.target.closest('.gallery-item') : null;
+    }
+    if (!item) return;
+    buildGalleryIndex();
+    const imgEl = item.querySelector('img');
+    currentImageIndex = galleryImages.indexOf(imgEl.src);
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('imageModalImg');
+    if (modal && modalImg) {
+        modalImg.src = galleryImages[currentImageIndex] || imgEl.src;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeImageModal(e) {
+
+    if (e && e.type === 'keydown') {
+        if (e.key === 'Escape') {
+            const modal = document.getElementById('imageModal');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+        return;
+    }
+    if (e && e.target && e.target.id !== 'imageModal') return;
+    const modal = document.getElementById('imageModal');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+function prevImage(e) {
+    e.stopPropagation();
+    if (!galleryImages.length) buildGalleryIndex();
+    currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+    const modalImg = document.getElementById('imageModalImg');
+    if (modalImg) modalImg.src = galleryImages[currentImageIndex];
+}
+
+function nextImage(e) {
+    e.stopPropagation();
+    if (!galleryImages.length) buildGalleryIndex();
+    currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+    const modalImg = document.getElementById('imageModalImg');
+    if (modalImg) modalImg.src = galleryImages[currentImageIndex];
+}
+
+
+function toggleFaq(el) {
+    const ans = el.nextElementSibling;
+    if (ans) ans.classList.toggle('active');
+}
+
+
+function showPanelTab(evt, tab) {
+
+    const tabs = evt.currentTarget.parentNode.querySelectorAll('button');
+    tabs.forEach(b => b.classList.remove('active'));
+    evt.currentTarget.classList.add('active');
+
+
+    document.querySelectorAll('#panelContent .panel-pane').forEach(p => p.style.display = 'none');
+    const pane = document.getElementById('pane-' + tab);
+    if (pane) pane.style.display = 'block';
+}
+
+
+function showAccountPanelTab(evt, tab) {
+
+    const container = evt.currentTarget ? evt.currentTarget.parentNode : null;
+    if (container) {
+        const tabs = container.querySelectorAll('button');
+        tabs.forEach(b => b.classList.remove('active'));
+        if (evt.currentTarget) evt.currentTarget.classList.add('active');
+    }
+
+
+    document.querySelectorAll('#accountPanelContent .panel-pane').forEach(p => p.style.display = 'none');
+    const pane = document.getElementById('account-pane-' + tab);
+    if (pane) pane.style.display = 'block';
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    document.querySelectorAll('.gallery-item').forEach(item => {
+        item.addEventListener('click', openImage);
+    });
+
+
+    document.addEventListener('keydown', (e) => {
+        const modal = document.getElementById('imageModal');
+        if (!modal || !modal.classList.contains('active')) return;
+        if (e.key === 'Escape') closeImageModal(e);
+        if (e.key === 'ArrowLeft') prevImage(e);
+        if (e.key === 'ArrowRight') nextImage(e);
+    });
+});
+
+function toggleSpecialty(btn) {
+    const card = btn.closest('.specialty-card');
+    if (!card) return;
+    const detail = card.querySelector('.specialty-detail');
+    if (!detail) return;
+    const open = detail.classList.toggle('open');
+    btn.textContent = open ? 'Cerrar' : 'Más info';
+}
+
+
+window.addEventListener('load', () => {
+    renderNews();
+});
+</script>
+
+</body>
+</html>
+
